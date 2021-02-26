@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using second_try.Models;
 using second_try.Repository;
+using second_try.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,9 @@ namespace second_try.Services
             return users.First();
         }
 
-        public async Task<IEnumerable<User>> GetUsers(string? username, string? email)
+        public async Task<IEnumerable<User>> GetUsers(UserRequest payload)
         {
-            return await _userRepository.GetAll(username, email);
+            return await _userRepository.GetAll(payload);
         }
 
         public async Task<User> InsertUser(User user)

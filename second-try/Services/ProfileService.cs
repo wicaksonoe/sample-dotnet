@@ -10,34 +10,37 @@ namespace second_try.Services
     public class ProfileService
     {
         private readonly ProfileRepository profileRepository;
-        private readonly UserRepository userRepository;
 
-        public ProfileService(ProfileRepository profileRepository, UserRepository userRepository)
+        public ProfileService(ProfileRepository profileRepository)
         {
             this.profileRepository = profileRepository;
-            this.userRepository = userRepository;
         }
 
         public async Task<Profile> GetProfile(long userId)
         {
+            // check if profile.UserId related to User.Id
+            // .....
+
+
             var profile = await profileRepository.GetByCondition(p => p.UserId == userId);
 
-            if (profile.Any() == false)
-            {
-                return new Profile();
-            }
-
-            return profile.First();
+            return profile.Any() ? profile.First() : null;
         }
 
-        public async Task<Profile> UpdateProfile(long userId, Profile profile)
+        public async Task<Profile> UpdateProfile(Profile profile)
         {
-            var user = await userRepository.FindById(userId);
+            // check if profile.UserId related to User.Id
+            // .....
 
-            user.Profile = profile;
-            await userRepository.Update(user);
 
-            return profile;
+            if (profile.Id == 0 && profile.UserId == 0)
+            {
+                throw new Exception("bad reqest");
+            }
+
+            var user = await profileRepository.AddOrUpdateProfile(profile);
+
+            return user;
         }
     }
 }

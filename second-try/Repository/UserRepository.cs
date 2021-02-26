@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using second_try.Interfaces;
 using second_try.Models;
+using second_try.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,25 +20,33 @@ namespace second_try.Repository
             this.context = appDbContext;
             this.user = this.context.Users
                 .Include(u => u.Profile)
+                .Include(u => u.Vehicles)
                 .AsQueryable();
         }
 
-        public async Task<IEnumerable<User>> GetAll(string? username, string? email)
+        public async Task<IEnumerable<User>> GetAll(UserRequest payload)
         {
             var users = this.user;
 
-            if (username != null)
+            if (payload.Username != null)
             {
-                users = users.Where(u => u.Username == username);
+                users = users.Where(u => u.Username == payload.Username);
             }
 
-            if (email != null)
+            if (payload.Email != null)
             {
-                users = users.Where(u => u.Email == email);
+                users = users.Where(u => u.Email == payload.Email);
             }
 
             return await users.ToListAsync();
         }
 
+        public override async Task<IEnumerable<User>> GetByCondition(Expression<Func<User, bool>> expression) => await this.user.Where(expression).ToListAsync();
+
+        public override async Task<User> Update(User update)
+        {
+            throw new NotImplementedException();
+            var user = this.user.FirstOrDefault();
+        }
     }
 }

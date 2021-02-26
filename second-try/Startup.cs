@@ -33,9 +33,16 @@ namespace second_try
 
             services.AddScoped<UserService>();
             services.AddScoped<ProfileService>();
+            services.AddScoped<VehicleService>();
+            services.AddScoped<TagService>();
+            services.AddScoped<UserTagService>();
 
             services.AddScoped<UserRepository>();
             services.AddScoped<ProfileRepository>();
+            services.AddScoped<VehicleRepository>();
+            services.AddScoped<TagRepository>();
+            services.AddScoped<UserTagRepository>();
+
 
             services.AddControllers()
                 .AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
