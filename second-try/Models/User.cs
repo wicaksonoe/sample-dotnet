@@ -7,27 +7,27 @@ using System.Threading.Tasks;
 
 namespace second_try.Models
 {
-    [Table("Users")]
+    [Table("users")]
     public class User
     {
-        [Column("id")]
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("id"),
+        Key,
+        DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
-        [Column("username")]
-        [Required(ErrorMessage = "Username cannot be empty")]
-        [StringLength(10, ErrorMessage = "Username cannot longer than 10 characters")]
+        [Column("username"),
+        Required(ErrorMessage = "Username cannot be empty"),
+        StringLength(10, ErrorMessage = "Username cannot longer than 10 characters")]
         public string Username { get; set; }
 
-        [Column("email")]
-        [Required(ErrorMessage = "Email cannot be empty")]
-        [StringLength(100)]
+        [Column("email"),
+        Required(ErrorMessage = "Email cannot be empty"),
+        StringLength(100)]
         public string Email { get; set; }
 
-        [Column("password")]
-        [Required(ErrorMessage = "Password cannot be empty")]
-        [MinLength(8, ErrorMessage = "Password should longer than 9 characters")]
+        [Column("password"),
+        Required(ErrorMessage = "Password cannot be empty"),
+        MinLength(8, ErrorMessage = "Password should longer than 9 characters")]
         public string Password { get; set; }
 
         public Profile Profile { get; set; }

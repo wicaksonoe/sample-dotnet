@@ -12,13 +12,11 @@ namespace second_try.Repository
 {
     public class UserRepository : RepositoryBase<User>
     {
-        private readonly AppDbContext context;
         private readonly IQueryable<User> user;
 
         public UserRepository(AppDbContext appDbContext) : base(appDbContext)
         {
-            this.context = appDbContext;
-            this.user = this.context.Users
+            this.user = appDbContext.Users
                 .Include(u => u.Profile)
                 .Include(u => u.Vehicles)
                 .AsQueryable();
@@ -42,11 +40,5 @@ namespace second_try.Repository
         }
 
         public override async Task<IEnumerable<User>> GetByCondition(Expression<Func<User, bool>> expression) => await this.user.Where(expression).ToListAsync();
-
-        public override async Task<User> Update(User update)
-        {
-            throw new NotImplementedException();
-            var user = this.user.FirstOrDefault();
-        }
     }
 }

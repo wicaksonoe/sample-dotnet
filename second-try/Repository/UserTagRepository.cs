@@ -17,11 +17,7 @@ namespace second_try.Repository
 
         public async Task<IEnumerable<UserTag>> BulkAdd(UserTag[] userTags)
         {
-            foreach (UserTag userTag in userTags)
-            {
-                appDbContext.UserTags.Add(userTag);
-            }
-
+            await appDbContext.AddRangeAsync(userTags);
             await appDbContext.SaveChangesAsync();
             
             return userTags;
@@ -29,11 +25,7 @@ namespace second_try.Repository
 
         public async Task<IEnumerable<UserTag>> BulkUpdate(UserTag[] userTags)
         {
-            foreach (UserTag userTag in userTags)
-            {
-                appDbContext.UserTags.Update(userTag);
-            }
-
+            appDbContext.UpdateRange(userTags);
             await appDbContext.SaveChangesAsync();
 
             return userTags;

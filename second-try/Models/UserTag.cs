@@ -10,17 +10,17 @@ namespace second_try.Models
     [Table("user_tags")]
     public class UserTag
     {
-        [Column("id")]
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("id"),
+        Key,
+        DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
-        [Column("user_id")]
-        [Required(ErrorMessage = "User ID cannot be empty")]
+        [Column("user_id"),
+        Required(ErrorMessage = "User ID cannot be empty")]
         public long UserId { get; set; }
 
-        [Column("tag_id")]
-        [Required(ErrorMessage = "Tag ID cannot be empty")]
+        [Column("tag_id"),
+        Required(ErrorMessage = "Tag ID cannot be empty")]
         public long TagId { get; set; }
 
         public User User { get; set; }

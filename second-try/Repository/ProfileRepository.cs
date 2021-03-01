@@ -28,6 +28,10 @@ namespace second_try.Repository
             }
             else
             {
+                if (result.Id != profile.Id) {
+                    throw new Exception("Bad request");
+                }
+
                 return await Update(profile);
             }
             

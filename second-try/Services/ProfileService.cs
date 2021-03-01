@@ -35,12 +35,10 @@ namespace second_try.Services
 
             if (profile.Id == 0 && profile.UserId == 0)
             {
-                throw new Exception("bad reqest");
+                throw new Exception("bad request");
             }
 
-            var user = await profileRepository.AddOrUpdateProfile(profile);
-
-            return user;
+            return await profileRepository.AddOrUpdateProfile(profile);
         }
     }
 }
