@@ -19,6 +19,8 @@ namespace second_try.Repository
             this.user = appDbContext.Users
                 .Include(u => u.Profile)
                 .Include(u => u.Vehicles)
+                .Include(u => u.UserTags)
+                    .ThenInclude(ut => ut.Tag)
                 .AsQueryable();
         }
 

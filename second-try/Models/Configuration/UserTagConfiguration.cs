@@ -11,8 +11,6 @@ namespace second_try.Models.Configuration
     {
         public void Configure(EntityTypeBuilder<UserTag> builder)
         {
-            builder.HasKey(t => new { t.UserId, t.TagId });
-
             builder
                 .HasOne(ut => ut.User)
                 .WithMany(u => u.UserTags)
